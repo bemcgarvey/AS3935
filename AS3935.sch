@@ -525,8 +525,6 @@ Wire Wire Line
 Wire Wire Line
 	7900 3700 8900 3700
 Wire Wire Line
-	8900 3900 6400 3900
-Wire Wire Line
 	8700 3800 8900 3800
 $Comp
 L Connector:Conn_01x02_Male J4
@@ -591,4 +589,120 @@ Text Notes 7450 4550 0    50   ~ 0
 SPI
 Text Notes 7450 4350 0    50   ~ 0
 I2C
+$Comp
+L Device:R R3
+U 1 1 5E6D3B53
+P 2150 5650
+F 0 "R3" H 2220 5696 50  0000 L CNN
+F 1 "150" H 2220 5605 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2080 5650 50  0001 C CNN
+F 3 "~" H 2150 5650 50  0001 C CNN
+	1    2150 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5E6D43DD
+P 2150 6100
+F 0 "D1" V 2189 5983 50  0000 R CNN
+F 1 "LED" V 2098 5983 50  0000 R CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Castellated" H 2150 6100 50  0001 C CNN
+F 3 "~" H 2150 6100 50  0001 C CNN
+	1    2150 6100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR016
+U 1 1 5E6D56A6
+P 2150 7300
+F 0 "#PWR016" H 2150 7050 50  0001 C CNN
+F 1 "GND" H 2155 7127 50  0000 C CNN
+F 2 "" H 2150 7300 50  0001 C CNN
+F 3 "" H 2150 7300 50  0001 C CNN
+	1    2150 7300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:2N7002K Q1
+U 1 1 5E6DCAE1
+P 2050 6600
+F 0 "Q1" H 2254 6646 50  0000 L CNN
+F 1 "2N7002K" H 2254 6555 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2250 6525 50  0001 L CIN
+F 3 "https://www.diodes.com/assets/Datasheets/ds30896.pdf" H 2050 6600 50  0001 L CNN
+	1    2050 6600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6400 3900 8150 3900
+$Comp
+L Connector:Conn_01x02_Male J8
+U 1 1 5E7111FF
+P 2950 5200
+F 0 "J8" H 2922 5128 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 3058 5290 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 2950 5200 50  0001 C CNN
+F 3 "~" H 2950 5200 50  0001 C CNN
+	1    2950 5200
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2150 5500 2150 5200
+Wire Wire Line
+	2150 5200 2750 5200
+Wire Wire Line
+	2150 5950 2150 5800
+Wire Wire Line
+	2150 6400 2150 6250
+$Comp
+L power:VDD #PWR015
+U 1 1 5E726D49
+P 2150 4800
+F 0 "#PWR015" H 2150 4650 50  0001 C CNN
+F 1 "VDD" H 2167 4973 50  0000 C CNN
+F 2 "" H 2150 4800 50  0001 C CNN
+F 3 "" H 2150 4800 50  0001 C CNN
+	1    2150 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 5100 2150 5100
+Wire Wire Line
+	2150 5100 2150 4800
+Text Label 1450 6600 0    50   ~ 0
+IRQ
+Wire Wire Line
+	1850 6600 1650 6600
+Text Label 8150 4150 0    50   ~ 0
+IRQ
+Wire Wire Line
+	8150 4150 8150 3900
+Connection ~ 8150 3900
+Wire Wire Line
+	8150 3900 8900 3900
+Text Notes 2850 5400 0    50   ~ 0
+IRQ LED Enable
+$Comp
+L Device:R R4
+U 1 1 5E731451
+P 1650 6900
+F 0 "R4" H 1720 6946 50  0000 L CNN
+F 1 "10 K" H 1720 6855 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1580 6900 50  0001 C CNN
+F 3 "~" H 1650 6900 50  0001 C CNN
+	1    1650 6900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 6800 2150 7050
+Wire Wire Line
+	1650 7050 2150 7050
+Connection ~ 2150 7050
+Wire Wire Line
+	2150 7050 2150 7300
+Wire Wire Line
+	1650 6750 1650 6600
+Connection ~ 1650 6600
+Wire Wire Line
+	1650 6600 1450 6600
 $EndSCHEMATC
