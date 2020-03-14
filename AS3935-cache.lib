@@ -1,0 +1,192 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# Connector_Conn_01x02_Male
+#
+DEF Connector_Conn_01x02_Male J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "Connector_Conn_01x02_Male" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+X Pin_1 1 200 0 150 L 50 50 1 1 P
+X Pin_2 2 200 -100 150 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Connector_Conn_01x03_Male
+#
+DEF Connector_Conn_01x03_Male J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Connector_Conn_01x03_Male" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+S 34 105 0 95 1 1 6 F
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+P 2 1 1 6 50 100 34 100 N
+X Pin_1 1 200 100 150 L 50 50 1 1 P
+X Pin_2 2 200 0 150 L 50 50 1 1 P
+X Pin_3 3 200 -100 150 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Connector_Conn_01x05_Male
+#
+DEF Connector_Conn_01x05_Male J 0 40 Y N 1 F N
+F0 "J" 0 300 50 H V C CNN
+F1 "Connector_Conn_01x05_Male" 0 -300 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S 34 -195 0 -205 1 1 6 F
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+S 34 105 0 95 1 1 6 F
+S 34 205 0 195 1 1 6 F
+P 2 1 1 6 50 -200 34 -200 N
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+P 2 1 1 6 50 100 34 100 N
+P 2 1 1 6 50 200 34 200 N
+X Pin_1 1 200 200 150 L 50 50 1 1 P
+X Pin_2 2 200 100 150 L 50 50 1 1 P
+X Pin_3 3 200 0 150 L 50 50 1 1 P
+X Pin_4 4 200 -100 150 L 50 50 1 1 P
+X Pin_5 5 200 -200 150 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_C
+#
+DEF Device_C C 0 10 N Y 1 F N
+F0 "C" 25 100 50 H V L CNN
+F1 "Device_C" 25 -100 50 H V L CNN
+F2 "" 38 -150 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ C_*
+$ENDFPLIST
+DRAW
+P 2 0 1 20 -80 -30 80 -30 N
+P 2 0 1 20 -80 30 80 30 N
+X ~ 1 0 150 110 D 50 50 1 1 P
+X ~ 2 0 -150 110 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_R
+#
+DEF Device_R R 0 0 N Y 1 F N
+F0 "R" 80 0 50 V V C CNN
+F1 "Device_R" 0 0 50 V V C CNN
+F2 "" -70 0 50 V I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ R_*
+$ENDFPLIST
+DRAW
+S -40 -100 40 100 0 1 10 N
+X ~ 1 0 150 50 D 50 50 1 1 P
+X ~ 2 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# SamacSys_Parts_AS3935-BQFT
+#
+DEF SamacSys_Parts_AS3935-BQFT IC 0 30 Y Y 1 F N
+F0 "IC" 1250 900 50 H V L CNN
+F1 "SamacSys_Parts_AS3935-BQFT" 1250 800 50 H V L CNN
+F2 "QFN65P400X400X80-17N" 1250 700 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/1/AS3935-BQFT.pdf" 1250 600 50 H I L CNN
+F4 "Interface - Specialized Franklin Lightning Sensor IC" 1250 500 50 H I L CNN "Description"
+F5 "0.8" 1250 400 50 H I L CNN "Height"
+F6 "985-AS3935-BQFT" 1250 300 50 H I L CNN "Mouser Part Number"
+F7 "https://www.mouser.com/Search/Refine.aspx?Keyword=985-AS3935-BQFT" 1250 200 50 H I L CNN "Mouser Price/Stock"
+F8 "ams" 1250 100 50 H I L CNN "Manufacturer_Name"
+F9 "AS3935-BQFT" 1250 0 50 H I L CNN "Manufacturer_Part_Number"
+DRAW
+P 5 0 1 6 200 700 1200 700 1200 -900 200 -900 200 700 N
+X ACG 1 0 0 200 R 50 50 0 0 U
+X IRQ 10 1400 -200 200 L 50 50 0 0 U
+X I2CL/SCL 11 1400 -100 200 L 50 50 0 0 U
+X MISO 12 1400 0 200 L 50 50 0 0 U
+X ISCD/MOSI 13 900 900 200 D 50 50 0 0 U
+X NC 14 800 900 200 D 50 50 0 0 N
+X ADD0 15 700 900 200 D 50 50 0 0 U
+X ADD1 16 600 900 200 D 50 50 0 0 U
+X TAB 17 500 900 200 D 50 50 0 0 U
+X INN 2 0 -100 200 R 50 50 0 0 I
+X INP 3 0 -200 200 R 50 50 0 0 I
+X GND 4 0 -300 200 R 50 50 0 0 W
+X VDD 5 500 -1100 200 U 50 50 0 0 W
+X VREG 6 600 -1100 200 U 50 50 0 0 U
+X EN_VREG 7 700 -1100 200 U 50 50 0 0 U
+X CS 8 800 -1100 200 U 50 50 0 0 I
+X SI 9 1400 -300 200 L 50 50 0 0 U
+ENDDRAW
+ENDDEF
+#
+# SamacSys_Parts_MA5532-AEB
+#
+DEF SamacSys_Parts_MA5532-AEB ANT 0 30 Y Y 1 F N
+F0 "ANT" 650 300 50 H V L CNN
+F1 "SamacSys_Parts_MA5532-AEB" 650 200 50 H V L CNN
+F2 "MA5532" 650 100 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/1/MA5532-AEB.pdf" 650 0 50 H I L CNN
+F4 "RFID Transponders" 650 -100 50 H I L CNN "Description"
+F5 "994-MA5532-AE" 650 -300 50 H I L CNN "Mouser Part Number"
+F6 "https://www.mouser.com/Search/Refine.aspx?Keyword=994-MA5532-AE" 650 -400 50 H I L CNN "Mouser Price/Stock"
+F7 "COILCRAFT" 650 -500 50 H I L CNN "Manufacturer_Name"
+F8 "MA5532-AEB" 650 -600 50 H I L CNN "Manufacturer_Part_Number"
+DRAW
+P 5 0 1 6 200 100 600 100 600 -200 200 -200 200 100 N
+X 1 1 0 0 200 R 50 50 0 0 U
+X 2 2 0 -100 200 R 50 50 0 0 U
+ENDDRAW
+ENDDEF
+#
+# power_GND
+#
+DEF power_GND #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -250 50 H I C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 6 0 1 0 0 0 0 -50 50 -50 0 -100 -50 -50 0 -50 N
+X GND 1 0 0 0 D 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_VDD
+#
+DEF power_VDD #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_VDD" 0 150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+C 0 75 25 0 1 0 N
+P 2 0 1 0 0 0 0 50 N
+X VDD 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+#End Library
