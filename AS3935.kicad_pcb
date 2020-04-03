@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 24)
+    (drawings 25)
     (tracks 160)
     (zones 0)
     (modules 21)
@@ -969,6 +969,9 @@
       (net 2 "Net-(ANT1-Pad1)"))
   )
 
+  (gr_text JLCJLCJLCJLC (at 141.732 92.964) (layer B.SilkS)
+    (effects (font (size 0.8 0.8) (thickness 0.15)) (justify mirror))
+  )
   (gr_text LED (at 127.254 64.262) (layer F.SilkS)
     (effects (font (size 1.5 1.5) (thickness 0.25)))
   )
@@ -1193,7 +1196,7 @@
   (segment (start 134.315 66.243) (end 134.315 67.056) (width 0.25) (layer F.Cu) (net 18))
   (segment (start 133.858 65.786) (end 134.315 66.243) (width 0.25) (layer F.Cu) (net 18))
 
-  (zone (net 1) (net_name GND) (layer B.Cu) (tstamp 5E6AFF18) (hatch edge 0.508)
+  (zone (net 1) (net_name GND) (layer B.Cu) (tstamp 5E86B6D3) (hatch edge 0.508)
     (connect_pads (clearance 0.508))
     (min_thickness 0.254)
     (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508) (smoothing fillet) (radius 0.5))
@@ -1398,7 +1401,7 @@
       )
     )
   )
-  (zone (net 1) (net_name GND) (layer F.Cu) (tstamp 5E6AFF15) (hatch edge 0.508)
+  (zone (net 1) (net_name GND) (layer F.Cu) (tstamp 5E86B6D0) (hatch edge 0.508)
     (connect_pads (clearance 0.508))
     (min_thickness 0.254)
     (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508) (smoothing fillet) (radius 0.5))
