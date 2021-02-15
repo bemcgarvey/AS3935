@@ -14,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L SamacSys_Parts:MA5532-AEB ANT1
+L AS3935-rescue:MA5532-AEB-SamacSys_Parts ANT1
 U 1 1 5E6A8392
 P 2450 3850
 F 0 "ANT1" H 2742 3485 50  0000 C CNN
@@ -31,7 +31,7 @@ F 9 "MA5532-AEB" H 3100 3250 50  0001 L CNN "Manufacturer_Part_Number"
 	-1   0    0    1   
 $EndComp
 $Comp
-L SamacSys_Parts:AS3935-BQFT IC1
+L AS3935-rescue:AS3935-BQFT-SamacSys_Parts IC1
 U 1 1 5E6A9DD2
 P 5000 3700
 F 0 "IC1" H 5450 4000 50  0000 L CNN
