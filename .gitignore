@@ -22,7 +22,20 @@ fp-info-cache
 *.ses
 
 # Exported BOM files
-*.xml
+AS3935.xml
 *.csv
 *.zip
+
+#MPLabX entries
+*.o
+*.elf
+*.map
+*.d
+*.bak
+**/nbproject/private
+**/nbproject/Makefile-*
+**/nbproject/Package-*
+**/debug
+**/dist
+**/build
 
