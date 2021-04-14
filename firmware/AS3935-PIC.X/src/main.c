@@ -13,18 +13,23 @@ void main(void) {
     char c;
     OSCTUNEbits.PLLEN = 1;
     RCONbits.IPEN = 1;
+    TRISDbits.TRISD0 = 0;
     LCDInit();
     lprintf(0, "AS3935");
     initSerial();
+    initMillisecondTimer();
     printf("AS3935 starting\r\n");
     c = initAS3935();
     if (c) {
         printf("AS3935 initialized\r\n");
+        printf("Antenna Frequency = %ld\r\n", getAntennaFrequency());
     } else {
         printf("Initialization failed\r\n");
+        printf("Antenna Frequency = %ld\r\n", getAntennaFrequency());
+        while(1);
     }
     setAFEGain(AFE_INDOOR);
-    initMillisecondTimer();
+    startMillisecondTimer(1);
     INTCONbits.GIEH = 1;
     INTCONbits.GIEL = 1;
     while (1) {

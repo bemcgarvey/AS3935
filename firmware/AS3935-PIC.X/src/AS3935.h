@@ -27,7 +27,7 @@ enum {MAX_NF_LEV = 7, MAX_WDTH = 15, MAX_SREJ = 15};
 extern char doInterrupt;
 
 char initAS3935(void);
-char tuneAntenna(void);
+long tuneAntenna(void);
 char calibrateOscillators(void);
 void setPower(powerMode m);
 powerMode readPower(void);
@@ -47,6 +47,7 @@ char readMaskDisturber(void);
 void setSpikeRejection(uint8_t sr);
 uint8_t readSpikeRejection(void);
 interruptSource readInterruptSource(void);
+long getAntennaFrequency(void);
 
 #endif	/* AS3935_H */
 

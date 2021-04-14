@@ -10,6 +10,7 @@ enum {
 char tuning = 0;
 int freqCount = 0;
 char doInterrupt = 0;
+long antennaFrequency = 0;
 
 char initAS3935(void) {
     initAS3935Hal();
@@ -24,8 +25,11 @@ char initAS3935(void) {
     INTCON3bits.INT1IP = 1;
     INTCON3bits.INT1IF = 0;
     INTCON3bits.INT1IE = 1;
-    if (!tuneAntenna()) {
+    long freq = tuneAntenna();
+    if (labs(freq - 500000) > 17500) {  //Must be within 3.5% of 500kHz
         return 0;
+    } else {
+        antennaFrequency = freq;
     }
     if (!calibrateOscillators()) {
         return 0;
@@ -33,11 +37,12 @@ char initAS3935(void) {
     return 1;
 }
 
-char tuneAntenna(void) {
+long tuneAntenna(void) {
     uint8_t reg;
     uint8_t best = 0;
     uint8_t milliseconds;
     int bestDiff = INT_MAX;
+    long bestFreq = 0;
     INTCONbits.GIE = 0;
     tuning = 1;
     writeRegister(8, 0b10000000); //put LCO on IRQ pin
@@ -68,11 +73,12 @@ char tuneAntenna(void) {
         if (abs(diff) < bestDiff) {
             bestDiff = abs(diff);
             best = i;
+            bestFreq = (long)freqCount * 160;
         }
     }
     writeRegister(8, best);
     tuning = 0;
-    return 1;
+    return bestFreq;
 }
 
 char calibrateOscillators(void) {
@@ -221,4 +227,8 @@ interruptSource readInterruptSource(void) {
     uint8_t reg;
     reg = readRegister(3);
     return reg & 0b00001111;
+}
+
+long getAntennaFrequency(void) {
+    return antennaFrequency;
 }

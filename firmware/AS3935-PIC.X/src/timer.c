@@ -12,12 +12,20 @@ void initMillisecondTimer(void) {
     PIR3bits.TMR4IF = 0;
     PIE3bits.TMR4IE = 1;
     IPR3bits.TMR4IP = 0;  //low priority
-    T4CONbits.TMR4ON = 1;
 }
 
 void processTimerInterrupt(void) {
     ++systemTime;
     if (systemTime % 1000 == 0) {
         LATDbits.LATD0 ^= 1;
+    }
+}
+
+void startMillisecondTimer(char start) {
+    if (start) {
+        T4CONbits.TMR4ON = 1;
+    } else {
+        T4CONbits.TMR4ON = 0;
+        TMR4 = 0;
     }
 }

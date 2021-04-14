@@ -4,6 +4,7 @@
 extern unsigned long systemTime;
 void initMillisecondTimer(void);
 void processTimerInterrupt(void);
+void startMillisecondTimer(char start);
 
 #endif	/* TIMER_H */
 
