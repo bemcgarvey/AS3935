@@ -46,29 +46,23 @@ long tuneAntenna(void) {
     INTCONbits.GIE = 0;
     tuning = 1;
     writeRegister(8, 0b10000000); //put LCO on IRQ pin
-    //TODO can this be changed to Timer4?
-    T3CONbits.TMR3ON = 0;
-    T3CONbits.RD16 = 1;
-    T3CONbits.T3CKPS = 0b11; //1:8 for 1 us per count
-    T3CONbits.TMR3CS = 0;
     for (uint8_t i = 0; i < 16; ++i) {
         reg = 0b10000000 + i;
         writeRegister(8, reg);
         __delay_ms(2);
-        TMR3 = (unsigned short)(-998);
         freqCount = 0;
-        PIR2bits.TMR3IF = 0;
-        T3CONbits.TMR3ON = 1;
+        PIR3bits.TMR4IF = 0;
+        TMR4 = 0;
+        T4CONbits.TMR4ON = 1;
         INTCONbits.GIE = 1;
         milliseconds = 100;
         while (milliseconds != 0) {
-            while (PIR2bits.TMR3IF == 0);
-            TMR3 = (unsigned short)(-998);
-            PIR2bits.TMR3IF = 0;
+            while (PIR3bits.TMR4IF == 0);
+            PIR3bits.TMR4IF = 0;
             --milliseconds;
         }
         INTCONbits.GIE = 0;
-        T3CONbits.TMR3ON = 0;
+        T4CONbits.TMR4ON = 0;
         int diff = freqCount - 3125;
         if (abs(diff) < bestDiff) {
             bestDiff = abs(diff);

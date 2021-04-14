@@ -96,14 +96,13 @@ void __interrupt(low_priority) lowISR(void) {
 }
 
 void initSerial(void) {
-    //Configure the USART
     SPBRG1 = 68; //115200
     SPBRGH1 = 68 >> 8;
     TXSTA1bits.BRGH = 1;
     BAUDCON1bits.BRG16 = 1;
-    TXSTA1bits.SYNC = 0; //asynchronous mode
-    RCSTA1bits.SPEN = 1; //Enable the serial port
-    TXSTA1bits.TXEN = 1; //Enable transmission
+    TXSTA1bits.SYNC = 0;
+    RCSTA1bits.SPEN = 1;
+    TXSTA1bits.TXEN = 1;
 }
 
 void putch(char c) {
