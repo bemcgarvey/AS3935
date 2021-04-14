@@ -1,25 +1,107 @@
-/*
- * File:   main.c
- * Author: bemcg
- *
- * Created on April 12, 2021, 1:25 PM
- */
-
 
 #include <xc.h>
-#include "AS3935_hal.h"
+#include "AS3935.h"
 #include "LCD.h"
+#include <stdio.h>
+#include "timer.h"
+#include <stdint.h>
+
+void initSerial(void);
+void initMillisecondTimer(void);
 
 void main(void) {
+    char c;
     OSCTUNEbits.PLLEN = 1;
+    RCONbits.IPEN = 1;
     LCDInit();
     lprintf(0, "AS3935");
-    initAS3935Hal();
-    char c = readRegister(2);
-    lprintf(1, "0x%02x", c);
-    c = readRegister(0);
-    lprintf(0, "0x%02x", c);
-    while (1) {
-        
+    initSerial();
+    printf("AS3935 starting\r\n");
+    c = initAS3935();
+    if (c) {
+        printf("AS3935 initialized\r\n");
+    } else {
+        printf("Initialization failed\r\n");
     }
+    setAFEGain(AFE_INDOOR);
+    initMillisecondTimer();
+    INTCONbits.GIEH = 1;
+    INTCONbits.GIEL = 1;
+    while (1) {
+        if (doInterrupt) {
+            doInterrupt = 0;
+            __delay_ms(2);
+            uint8_t nf, wdth, srej;
+            int dist;
+            switch (readInterruptSource()) {
+                case INT_NH:
+                    nf = readNoiseFloorLevel();
+                    if (nf < MAX_NF_LEV) {
+                        setNoiseFloorLevel(nf + 1);
+                        printf("Noise floor set to %d\r\n", nf + 1);
+                    } else {
+                        printf("Noise floor at max\r\n");
+                    }
+                    break;
+                case INT_D:
+                    printf("Disturber detected");
+                    wdth = readWatchdogThreshold();
+                    srej = readSpikeRejection();
+                    if (wdth <= srej) {
+                        if (wdth < MAX_WDTH) {
+                            setWatchdogThreshold(wdth + 1);
+                            printf(" WDTH set to %d\r\n", wdth + 1);
+                        } else {
+                            printf(" WDTH at max\r\n");
+                        }
+                    } else {
+                        if (srej < MAX_SREJ) {
+                            setSpikeRejection(srej + 1);
+                            printf(" SREJ set to %d\r\n", srej + 1);
+                        } else {
+                            printf(" SREJ at max\r\n");
+                        }
+                    }
+                    break;
+                case INT_L:
+                    dist = readDistance();
+                    printf("Lightning detected. Storm at %d km\r\n", dist);
+                    break;
+                case INT_DIST:
+                    dist = readDistance();
+                    printf("Update: Storm at %d km\r\n", dist);
+                    break;
+            }
+        }
+    }
+}
+
+void __interrupt(high_priority) highISR(void) {
+    if (INTCON3bits.INT1IF) {
+        processInterrupt();
+        INTCON3bits.INT1IF = 0;
+    }
+}
+
+void __interrupt(low_priority) lowISR(void) {
+    if (PIR3bits.TMR4IF) {
+        processTimerInterrupt();
+        PIR3bits.TMR4IF = 0;
+    }
+}
+
+void initSerial(void) {
+    //Configure the USART
+    SPBRG1 = 68; //115200
+    SPBRGH1 = 68 >> 8;
+    TXSTA1bits.BRGH = 1;
+    BAUDCON1bits.BRG16 = 1;
+    TXSTA1bits.SYNC = 0; //asynchronous mode
+    RCSTA1bits.SPEN = 1; //Enable the serial port
+    TXSTA1bits.TXEN = 1; //Enable transmission
+}
+
+void putch(char c) {
+    while (TX1IF == 0);
+    TXREG1 = c;
 }
