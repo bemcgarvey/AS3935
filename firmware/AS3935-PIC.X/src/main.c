@@ -11,6 +11,9 @@ void initMillisecondTimer(void);
 
 void main(void) {
     char c;
+    unsigned long lastDisturber, lastNFChange;
+    uint8_t nf, wdth, srej;
+    int dist;
     OSCTUNEbits.PLLEN = 1;
     RCONbits.IPEN = 1;
     TRISDbits.TRISD0 = 0;
@@ -26,29 +29,37 @@ void main(void) {
     } else {
         printf("Initialization failed\r\n");
         printf("Antenna Frequency = %ld\r\n", getAntennaFrequency());
-        while(1);
+        while (1);
     }
     setAFEGain(AFE_INDOOR);
     startMillisecondTimer(1);
     INTCONbits.GIEH = 1;
     INTCONbits.GIEL = 1;
+    lastDisturber = getSystemTime();
     while (1) {
         if (doInterrupt) {
             doInterrupt = 0;
             __delay_ms(2);
-            uint8_t nf, wdth, srej;
-            int dist;
             switch (readInterruptSource()) {
                 case INT_NH:
+                    lastNFChange = getSystemTime();
                     nf = readNoiseFloorLevel();
                     if (nf < MAX_NF_LEV) {
                         setNoiseFloorLevel(nf + 1);
                         printf("Noise floor set to %d\r\n", nf + 1);
                     } else {
                         printf("Noise floor at max\r\n");
+                        wdth = readWatchdogThreshold();
+                        if (wdth < MAX_WDTH) {
+                            setWatchdogThreshold(wdth + 1);
+                            printf(" WDTH set to %d\r\n", wdth + 1);
+                        } else {
+                            printf(" WDTH at max\r\n");
+                        }
                     }
                     break;
                 case INT_D:
+                    lastDisturber = getSystemTime();
                     printf("Disturber detected");
                     wdth = readWatchdogThreshold();
                     srej = readSpikeRejection();
@@ -76,6 +87,31 @@ void main(void) {
                     dist = readDistance();
                     printf("Update: Storm at %d km\r\n", dist);
                     break;
+            }
+        }
+        unsigned long currentTime = getSystemTime();
+        if (currentTime - lastNFChange > 5000) {
+            lastNFChange = currentTime;
+            nf = readNoiseFloorLevel();
+            if (nf != 0) {
+                setNoiseFloorLevel(nf - 1);
+                printf("Noise floor set to %d\r\n", nf - 1);
+            } 
+        }
+        if (currentTime - lastDisturber > 60000) {
+            lastDisturber = currentTime;
+            wdth = readWatchdogThreshold();
+            srej = readSpikeRejection();
+            if (wdth > srej) {
+                if (wdth != 0) {
+                    setWatchdogThreshold(wdth - 1);
+                    printf(" WDTH set to %d\r\n", wdth - 1);
+                } 
+            } else {
+                if (srej != 0) {
+                    setSpikeRejection(srej - 1);
+                    printf(" SREJ set to %d\r\n", srej - 1);
+                } 
             }
         }
     }

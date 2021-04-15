@@ -7,18 +7,16 @@ void initMillisecondTimer(void) {
     T4CONbits.TMR4ON = 0;
     T4CONbits.T4CKPS = 0b10; //1:16
     T4CONbits.T4OUTPS = 9; //1:10
-    PR4 = 50;  //1 ms
+    PR4 = 49; //1 ms  //TODO Adjust for actual device
     TMR4 = 0;
     PIR3bits.TMR4IF = 0;
     PIE3bits.TMR4IE = 1;
-    IPR3bits.TMR4IP = 0;  //low priority
+    IPR3bits.TMR4IP = 0; //low priority
 }
 
 void processTimerInterrupt(void) {
     ++systemTime;
-    if (systemTime % 1000 == 0) {
-        LATDbits.LATD0 ^= 1;
-    }
+    LATDbits.LATD0 ^= 1;
 }
 
 void startMillisecondTimer(char start) {
@@ -28,4 +26,12 @@ void startMillisecondTimer(char start) {
         T4CONbits.TMR4ON = 0;
         TMR4 = 0;
     }
+}
+
+unsigned long getSystemTime(void) {
+    unsigned long currentTime;
+    INTCONbits.GIEL = 0;
+    currentTime = systemTime;
+    INTCONbits.GIEL = 1;
+    return currentTime;
 }
