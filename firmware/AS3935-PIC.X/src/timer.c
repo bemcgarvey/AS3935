@@ -16,7 +16,6 @@ void initMillisecondTimer(void) {
 
 void processTimerInterrupt(void) {
     ++systemTime;
-    LATDbits.LATD0 ^= 1;
 }
 
 void startMillisecondTimer(char start) {

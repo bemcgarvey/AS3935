@@ -7,7 +7,6 @@
 #include <stdint.h>
 
 void initSerial(void);
-void initMillisecondTimer(void);
 
 void main(void) {
     char c;
@@ -16,7 +15,6 @@ void main(void) {
     int dist;
     OSCTUNEbits.PLLEN = 1;
     RCONbits.IPEN = 1;
-    TRISDbits.TRISD0 = 0;
     LCDInit();
     lprintf(0, "AS3935");
     initSerial();

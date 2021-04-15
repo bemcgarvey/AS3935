@@ -14,6 +14,7 @@ long antennaFrequency = 0;
 
 char initAS3935(void) {
     initAS3935Hal();
+    antennaFrequency = 0;
     writeRegister(PRESET_DEFAULT, DIRECT_COMMAND);
     uint8_t reg = readRegister(0);
     reg >>= 1;
@@ -25,11 +26,9 @@ char initAS3935(void) {
     INTCON3bits.INT1IP = 1;
     INTCON3bits.INT1IF = 0;
     INTCON3bits.INT1IE = 1;
-    long freq = tuneAntenna();
-    if (labs(freq - 500000) > 17500) {  //Must be within 3.5% of 500kHz
+    antennaFrequency = tuneAntenna();
+    if (labs(antennaFrequency - 500000) > 17500) {  //Must be within 3.5% of 500kHz
         return 0;
-    } else {
-        antennaFrequency = freq;
     }
     if (!calibrateOscillators()) {
         return 0;
