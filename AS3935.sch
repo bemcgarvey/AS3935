@@ -705,4 +705,6 @@ Wire Wire Line
 Connection ~ 1650 6600
 Wire Wire Line
 	1650 6600 1450 6600
+Text Notes 2550 4250 0    50   ~ 0
+Adjust as C2 needed.  330 pF may be better
 $EndSCHEMATC
