@@ -11,8 +11,10 @@ void initSerial(void);
 void main(void) {
     char c;
     unsigned long lastDisturber, lastNFChange;
+    long energy;
     uint8_t nf, wdth, srej;
     int dist;
+    int strikeCount = 0;
     OSCTUNEbits.PLLEN = 1;
     RCONbits.IPEN = 1;
     LCDInit();
@@ -79,9 +81,15 @@ void main(void) {
                     break;
                 case INT_L:
                     dist = readDistance();
+                    energy = readEnergy();
+                    ++strikeCount;
                     printf("Lightning detected. Storm at %d km\r\n", dist);
+                    printf("Energy = %ld\r\n\r\n", energy);
+                    lprintf(0, "Strikes:%d", strikeCount);
+                    lprintf(1, "E:%ld", energy);
                     break;
                 case INT_DIST:
+                    //TODO is this correct way to handle this interrupt source?
                     dist = readDistance();
                     printf("Update: Storm at %d km\r\n", dist);
                     break;

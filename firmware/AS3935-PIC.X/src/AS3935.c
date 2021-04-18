@@ -121,6 +121,8 @@ afeGain readAFEGain(void) {
 void clearStats(void) {
     uint8_t reg;
     reg = readRegister(2);
+    reg |= 0b01000000;
+    writeRegister(2, reg);
     reg &= 0b10111111;
     writeRegister(2, reg);
     reg |= 0b01000000;
@@ -224,4 +226,14 @@ interruptSource readInterruptSource(void) {
 
 long getAntennaFrequency(void) {
     return antennaFrequency;
+}
+
+long readEnergy(void) {
+    long energy;
+    energy = (readRegister(6) & 0b00001111);
+    energy <<= 4;
+    energy |= readRegister(5);
+    energy <<= 8;
+    energy |= readRegister(4);
+    return energy;
 }

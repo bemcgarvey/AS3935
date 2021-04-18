@@ -22,7 +22,9 @@ typedef enum {
     INT_NH = 0b0001, INT_D = 0b0100, INT_L = 0b1000, INT_DIST = 0b0000
 } interruptSource;
 
-enum {MAX_NF_LEV = 7, MAX_WDTH = 15, MAX_SREJ = 15};
+enum {
+    MAX_NF_LEV = 7, MAX_WDTH = 15, MAX_SREJ = 15
+};
 
 extern char doInterrupt;
 
@@ -48,6 +50,6 @@ void setSpikeRejection(uint8_t sr);
 uint8_t readSpikeRejection(void);
 interruptSource readInterruptSource(void);
 long getAntennaFrequency(void);
-
+long readEnergy(void);
 #endif	/* AS3935_H */
 
